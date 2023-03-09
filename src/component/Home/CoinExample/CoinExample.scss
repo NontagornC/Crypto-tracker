@@ -1,0 +1,65 @@
+.coin_box {
+  width: 100%;
+  margin: 0;
+  padding: 5rem 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  background-image: linear-gradient(
+    to bottom left,
+    #c31432,
+    #9e1431,
+    #79152c,
+    #551425,
+    #33111a,
+    #290e17,
+    #200812,
+    #16010b,
+    #1e0315,
+    #22051e,
+    #250829,
+    #240b36,
+    #240b36
+  );
+  .big_text {
+    padding: 1.5rem 2rem;
+    .col {
+      font-size: 4rem;
+      font-weight: 700;
+      text-shadow: 3px 3px 3px rgba(255, 255, 255, 0.6);
+    }
+  }
+  .small_text {
+    padding: 2rem 4rem 4rem 4rem;
+    .col {
+      font-size: 2rem;
+      background: linear-gradient(
+        to right,
+        #babac2,
+        #551425,
+        #babac2,
+        #79152c,
+        #babac2,
+        #9e1431,
+        #babac2,
+        #c31432
+      );
+      -webkit-background-clip: text;
+      -moz-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      color: transparent;
+    }
+  }
+  button {
+    margin: 5rem;
+    width: 15rem;
+    height: 6rem;
+    background: linear-gradient(to bottom right, #7f7f85, #080a0f);
+    font-size: 1.7rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.2);
+  }
+}

@@ -1,0 +1,74 @@
+.table_box {
+  overflow: hidden;
+  width: calc(85% - 1rem);
+  border: 1px solid white;
+  border-radius: 2rem;
+  table {
+    padding-bottom: 3rem;
+    margin: 0;
+    thead {
+      tr {
+        height: 5rem;
+        th {
+          font-size: 1.5rem;
+          font-weight: 200;
+          text-align: center;
+          vertical-align: middle;
+        }
+        .symbol {
+          width: 10rem;
+          svg {
+            width: 3rem;
+            height: 3rem;
+            color: rgba(255, 255, 255, 0.2);
+          }
+        }
+        .high {
+          svg {
+            color: green;
+            font-size: 2rem;
+          }
+        }
+        .low {
+          svg {
+            color: red;
+            font-size: 2rem;
+          }
+        }
+      }
+    }
+    tbody {
+      tr {
+        text-align: center;
+        vertical-align: middle;
+        &:hover {
+          transform: scale(1.05);
+          transition: transform 0.7s;
+          z-index: 100;
+        }
+        td {
+          font-size: 1.4rem;
+        }
+        .detail_box {
+          text-align: start;
+          font-size: 2rem;
+          img {
+            width: 6rem;
+            height: 6rem;
+            padding: 1rem;
+          }
+          span {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.5);
+          }
+        }
+        .high {
+          color: rgb(4, 194, 4);
+        }
+        .low {
+          color: red;
+        }
+      }
+    }
+  }
+}
