@@ -1,8 +1,10 @@
 import {Row,Col,Button} from "react-bootstrap";
 import "./Banner.scss"
 import { Typewriter } from 'react-simple-typewriter'
+import { useNavigate } from "react-router-dom";
 
 const Banner =()=> {
+    const navigate = useNavigate()
     return (
         <div className="banner_container">
             <Row>
@@ -23,7 +25,7 @@ const Banner =()=> {
                             />
                         </span>
                     </div>
-                    <Button variant="secondary">Get Started</Button>
+                    <Button variant="secondary" onClick={()=>navigate(`/detailpage`)}>Get Started</Button>
                 </Col>
                 <Col className="right">
                 </Col>

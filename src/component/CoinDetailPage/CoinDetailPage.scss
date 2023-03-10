@@ -1,5 +1,9 @@
 .detail_container {
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   background-image: linear-gradient(to bottom, #212430, #17171a);
   .container {
     display: flex;
@@ -7,6 +11,7 @@
     justify-content: center;
     align-items: center;
     color: white;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.4);
     .big_text {
       font-size: 3rem;
       background: linear-gradient(
@@ -33,28 +38,138 @@
       padding: 1rem 0;
     }
     .title_container {
-      width: 100%;
+      width: 80%;
       .col {
         display: flex;
         flex-direction: column;
-        justify-content: center;
         align-items: center;
-        background-color: rgba(158, 20, 49, 0.2);
+        background-image: linear-gradient(
+          to bottom left,
+          #c31432,
+          #9e1431,
+          #79152c,
+          #551425,
+          #33111a,
+          #290e17,
+          #200812,
+          #16010b,
+          #1e0315,
+          #22051e,
+          #250829,
+          #240b36
+        );
         margin: 3rem;
         padding: 1.5rem;
         border-radius: 3rem;
         .img {
           img {
-            width: 8rem;
-            height: 8rem;
+            width: 7rem;
           }
         }
         .name {
           font-size: 1.5rem;
+          padding: 0.5rem 1rem;
           color: rgba(255, 255, 255, 0.6);
         }
         .price {
+          display: block;
           font-size: 2rem;
+        }
+      }
+    }
+  }
+  .d-flex {
+    margin-top: 4rem;
+    margin-bottom: 2rem;
+    justify-content: center;
+    width: 100%;
+    input {
+      width: 50%;
+      height: 3rem;
+      background-color: rgba(255, 255, 255, 0.6);
+      font-size: 1.5rem;
+    }
+    button {
+      height: 3rem;
+      width: 3rem;
+      color: white;
+      svg {
+        color: white;
+      }
+    }
+  }
+  .table_box {
+    width: calc(85% - 1rem);
+    border: 1px solid white;
+    border-radius: 2rem;
+    margin: 2rem;
+    overflow: scroll;
+    max-height: 75rem;
+    table {
+      padding-bottom: 3rem;
+      margin: 0;
+      thead {
+        tr {
+          height: 5rem;
+          th {
+            font-size: 1.5rem;
+            font-weight: 200;
+            text-align: center;
+            vertical-align: middle;
+          }
+          .symbol {
+            width: 10rem;
+            svg {
+              width: 3rem;
+              height: 3rem;
+              color: rgba(255, 255, 255, 0.2);
+            }
+          }
+          .high {
+            svg {
+              color: green;
+              font-size: 2rem;
+            }
+          }
+          .low {
+            svg {
+              color: red;
+              font-size: 2rem;
+            }
+          }
+        }
+      }
+      tbody {
+        tr {
+          text-align: center;
+          vertical-align: middle;
+          &:hover {
+            transform: scale(1.05);
+            transition: transform 0.7s;
+            z-index: 100;
+          }
+          td {
+            font-size: 1.4rem;
+          }
+          .detail_box {
+            text-align: start;
+            font-size: 2rem;
+            img {
+              width: 6rem;
+              height: 6rem;
+              padding: 1rem;
+            }
+            span {
+              font-size: 1.2rem;
+              color: rgba(255, 255, 255, 0.5);
+            }
+          }
+          .high {
+            color: rgb(4, 194, 4);
+          }
+          .low {
+            color: red;
+          }
         }
       }
     }
