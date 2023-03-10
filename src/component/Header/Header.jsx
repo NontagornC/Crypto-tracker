@@ -1,11 +1,14 @@
 import {Container,Nav,Navbar} from "react-bootstrap"
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "./Header.scss"
+import { useNavigate } from "react-router-dom";
+
 const Header =()=> {
+    const navigate = useNavigate()
     return (
         <Navbar expand="lg">
             <Container fluid>
-                <Navbar.Brand className="logo_name" href="#">NTGCurrency.</Navbar.Brand>
+                <Navbar.Brand className="logo_name" href="#" onClick={()=>navigate(`/`)}>NTGCurrency.</Navbar.Brand>
                 <Navbar.Toggle aria-controls="navbarScroll" />
                 <Navbar.Collapse id="navbarScroll">
                     <Nav
@@ -13,8 +16,9 @@ const Header =()=> {
                         style={{ maxHeight: '100px' }}
                         navbarScroll
                     >
-                        <Nav.Link href="#action1">Home</Nav.Link>
-                        <Nav.Link href="#action2">Link</Nav.Link>
+                        <Nav.Link href="#action1" onClick={()=>navigate(`/`)}>Home</Nav.Link>
+                        <Nav.Link href="#action2" onClick={()=>navigate(`/detailpage`)}>Currency</Nav.Link>
+                        <Nav.Link href="#action2" onClick={()=>navigate(`/exchange`)}>Exchange</Nav.Link>
                     </Nav>
                 </Navbar.Collapse>
             </Container>

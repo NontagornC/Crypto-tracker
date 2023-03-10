@@ -3,7 +3,6 @@ import About from "./About/About"
 import CoinExample from "./CoinExample/CoinExample"
 import { useState,useEffect } from "react"
 import fetchData from "../../utils/fetchData"
-// import axios from "axios";
 
 
 const Home = () => {
@@ -16,23 +15,12 @@ const Home = () => {
     const getCoin = (url) => {
         fetchData(url)
           .then((result) => {
-            console.log(result);
-            setCoinsExample(result); 
+            setCoinsExample(result.data); 
           })
           .catch((error) => {
             console.error(error);
           });
       };
-
-      // const fetchData = async (url) => {
-      //   try {
-      //     let data = await axios.get(url);
-      //     return data;
-      //   } catch (error) {
-      //     console.error(error);
-      //     return error;
-      //   }
-      // };
 
     return (
         <div>
