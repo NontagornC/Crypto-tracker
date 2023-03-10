@@ -6,6 +6,18 @@ html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-family: "barcadebrawl", sans-serif;
+  &::-webkit-scrollbar {
+    width: 1.5rem;
+    height: 1.4rem;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: #2a2a2a;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #2f343a;
+  }
 }
 
 code {

@@ -17,14 +17,15 @@
       background: linear-gradient(
         to right,
         #babac2,
-        #551425,
+        #c31432,
         #babac2,
-        #79152c,
+        #c41a41,
         #babac2,
         #9e1431,
         #babac2,
         #c31432
       );
+      text-shadow: 3px 3px 3px rgba(#c31432, 0.6);
       -webkit-background-clip: text;
       -moz-background-clip: text;
       background-clip: text;
@@ -43,6 +44,9 @@
         display: flex;
         flex-direction: column;
         align-items: center;
+        margin: 3rem;
+        padding: 1.5rem;
+        border-radius: 3rem;
         background-image: linear-gradient(
           to bottom left,
           #c31432,
@@ -58,9 +62,9 @@
           #250829,
           #240b36
         );
-        margin: 3rem;
-        padding: 1.5rem;
-        border-radius: 3rem;
+        &:hover {
+          transform: scale(1.1);
+        }
         .img {
           img {
             width: 7rem;
@@ -83,21 +87,41 @@
     margin-bottom: 2rem;
     justify-content: center;
     width: 100%;
+
     input {
-      width: 50%;
-      height: 3rem;
-      background-color: rgba(255, 255, 255, 0.6);
+      width: 70%;
+      height: 4rem;
+      background: #2f343a;
+      border: 1px solid rgba(255, 255, 255, 0.4);
       font-size: 1.5rem;
     }
     button {
-      height: 3rem;
-      width: 3rem;
-      color: white;
-      svg {
-        color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 4rem;
+      border: none;
+      background-image: linear-gradient(
+        to bottom left,
+        #c31432,
+        #9e1431,
+        #79152c,
+        #551425,
+        #33111a,
+        #290e17,
+        #200812,
+        #16010b,
+        #1e0315,
+        #22051e,
+        #250829,
+        #240b36
+      );
+      .search-icon {
+        font-size: 3.5rem;
       }
     }
   }
+
   .table_box {
     width: calc(85% - 1rem);
     border: 1px solid white;
@@ -105,6 +129,18 @@
     margin: 2rem;
     overflow: scroll;
     max-height: 75rem;
+    &::-webkit-scrollbar {
+      width: 1.5rem;
+      height: 1.4rem;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: #2a2a2a;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: #2f343a;
+    }
     table {
       padding-bottom: 3rem;
       margin: 0;
