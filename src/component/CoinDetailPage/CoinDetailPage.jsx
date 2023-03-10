@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
-import {Form,Button,Row,Col,Container,Table} from 'react-bootstrap';
-import fetchData from '../../utils/fetchData';
-import { AiOutlineSearch } from "react-icons/ai";
+import {Row,Col,Container,Table} from 'react-bootstrap';
 import { SiBitcoincash } from "react-icons/si";
 import { BiArrowToTop,BiArrowToBottom } from "react-icons/bi";
+import fetchData from '../../utils/fetchData';
+import SearchBar from '../SearchBar/SearchBar';
 import "./CoinDetailPage.scss"
 
 const CoinDetailPage = () => {
@@ -49,17 +49,9 @@ const CoinDetailPage = () => {
           })}
         </Row>
       </Container>
-      <Form className="d-flex ">
-            <Form.Control
-              type="search"
-              placeholder="Search for your coins"
-              className="me-2"
-              aria-label="Search"
-            />
-            <Button >
-              <AiOutlineSearch className="search-icon"/>
-            </Button>
-      </Form>
+
+      <SearchBar/>
+
       <div className='table_box'>
         <Table striped bordered hover variant="dark">
           <thead>
@@ -87,7 +79,7 @@ const CoinDetailPage = () => {
             })}
           </tbody>
         </Table>
-    </div>
+      </div>
     </div>
   )
 }

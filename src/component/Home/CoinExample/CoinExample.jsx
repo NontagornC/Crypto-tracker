@@ -15,7 +15,7 @@ const CoinExample = ({coinsExample}) => {
           <Col>More 100+ crypto coin available in the market</Col>
         </Row>
         <CoinItem coinsExample={coinsExample}/>
-        <button type="button" class="btn btn-secondary" onClick={()=>navigate(`/detailpage`)}>See more</button>
+        <button type="button" className="btn btn-secondary" onClick={()=>navigate(`/detailpage`)}>See more</button>
     </div>
   )
 }
