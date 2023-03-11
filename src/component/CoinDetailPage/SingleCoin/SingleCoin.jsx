@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import FetchEndPoint from '../../../utils/fetchEndpoint'
 import { useParams } from 'react-router-dom'
 import "./SingleCoin.scss"
+// import LineChart from './LineChart/LineChart'
 
 const SingleCoin = () => {
     const {id} =useParams()
     const res = FetchEndPoint(`https://api.coingecko.com/api/v3/coins/${id}`)
     if(!res) return;
     const data = res.data
-    console.log(data);
 
     const lastUpdated =(data)=> new Date(data).toLocaleString({
       timeZone: 'Asia/Bangkok',
@@ -19,7 +19,6 @@ const SingleCoin = () => {
 
   return (
     <div className='singlecoin_container'>
-        {/* <h1>Hello {id} coin </h1> */}
         <div className='main_detail'>
 
           <div className='name_detail'>
@@ -78,6 +77,10 @@ const SingleCoin = () => {
             </div>
           </div>
         </div>
+        {/* <div style={{ width: 700 }}>
+          <LineChart id={data.id}/>
+        </div> */}
+
     </div>
   )
 }

@@ -1,12 +1,14 @@
 import React from 'react'
 import "./Exchange.scss"
-import {Accordion,Row,Col} from 'react-bootstrap';
-import SearchBar from '../SearchBar/SearchBar';
+import {Accordion,Row,Col,Form} from 'react-bootstrap';
 import { useState,useEffect } from 'react';
 import fetchData from '../../utils/fetchData';
+
+
 const Exchange = () => {
 
   const [data,setData]=useState([])
+  const [searchWord,setSearchWord] = useState("")
   useEffect(()=>{
     getData()
   },[])
@@ -18,14 +20,28 @@ const Exchange = () => {
       console.error(error)
     })
   }
-  console.log("data test",data);
 
   return (
     <div className="main_container">
-      <SearchBar/>
+      <Form className="d-flex ">
+            <Form.Control
+              type="search"
+              placeholder="Search for your coins"
+              className="me-2"
+              aria-label="Search" value={searchWord}
+              onChange={(e)=>{
+                setSearchWord(e.target.value)
+                console.log(searchWord);
+              }}
+              style={{ color: "white" }}
+            />
+      </Form>
       <div className='accordion_container'  style={{width: "70%"}}>
         <Accordion alwaysOpen flush>
-          {data.map((result)=>{
+          {data .filter((result) =>
+          result.name.toLowerCase().includes(searchWord.toLowerCase()) ||
+          result.id.toLowerCase().includes(searchWord.toLowerCase())
+          ).map((result)=>{
             return (
             <Accordion.Item key={result.id} eventKey={result.id}>
               

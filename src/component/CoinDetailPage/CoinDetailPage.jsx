@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
-import {Row,Col,Container,Table} from 'react-bootstrap';
+import {Row,Col,Container,Table,Form} from 'react-bootstrap';
 import { SiBitcoincash } from "react-icons/si";
 import { BiArrowToTop,BiArrowToBottom } from "react-icons/bi";
 import fetchData from '../../utils/fetchData';
-import SearchBar from '../SearchBar/SearchBar';
 import "./CoinDetailPage.scss"
 
 const CoinDetailPage = () => {
   const [coinData,setCoinData]=useState({})
   const [allCoinData,setAllCoinData]=useState([])
+  const [searchWord,setSearchWord] = useState("")
   const navigate = useNavigate()
   
   useEffect(()=>{
@@ -39,8 +39,8 @@ const CoinDetailPage = () => {
         <Row className='small_text'>Top 3 Cryptocurrency</Row>
         <Row className='title_container'>
           {Array.isArray(coinData) &&coinData.map((result)=>{
-            return (
-              <Col key={result.id}>
+            return ( 
+              <Col key={result.id} onClick={()=>navigate(`/singlecoin/${result.id}`)}>
                   <Row className='img'><img src={result.image} alt={result.id} /></Row>
                   <Row className='name'>{result.name}</Row>
                   <Row className='price'>{result.current_price.toFixed(3)}<span>&#36;</span></Row>
@@ -50,7 +50,19 @@ const CoinDetailPage = () => {
         </Row>
       </Container>
 
-      <SearchBar/>
+      <Form className="d-flex ">
+            <Form.Control
+              type="search"
+              placeholder="Search for your coins"
+              className="me-2"
+              aria-label="Search" value={searchWord}
+              onChange={(e)=>{
+                setSearchWord(e.target.value)
+                console.log(searchWord);
+              }}
+              style={{ color: "white" }}
+            />
+      </Form>
 
       <div className='table_box'>
         <Table striped bordered hover variant="dark">
@@ -65,7 +77,10 @@ const CoinDetailPage = () => {
             </tr>
           </thead>
           <tbody>
-            {allCoinData.map((item)=>{
+            {allCoinData.filter((result) =>
+                result.name.toLowerCase().includes(searchWord.toLowerCase()) ||
+                result.symbol.toLowerCase().includes(searchWord.toLowerCase())
+                ).map((item)=>{
               return (
                 <tr key={item.id} onClick={()=>navigate(`/singlecoin/${item.id}`)}>
                   <td>{item.market_cap_rank}</td>
