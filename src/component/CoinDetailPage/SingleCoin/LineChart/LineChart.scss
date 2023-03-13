@@ -1,0 +1,53 @@
+.chart_container {
+  padding: 2rem;
+  width: 80%;
+  background-color: black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-top: 1px solid #ffffff;
+  .btn_container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    gap: 1rem;
+    button {
+      border: none;
+      border-radius: 1rem;
+      width: 7rem;
+      height: 4rem;
+      background-image: linear-gradient(
+        to top right,
+        #c31432,
+        #9e1431,
+        #79152c,
+        #551425,
+        #33111a,
+        #290e17,
+        #200812,
+        #16010b,
+        #1e0315,
+        #22051e,
+        #250829,
+        #240b36
+      );
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      &:hover {
+        background-image: linear-gradient(
+          to top right,
+          #c31432,
+          #9e1431,
+          #79152c,
+          #551425,
+          #33111a,
+          #290e17
+        );
+      }
+    }
+  }
+}

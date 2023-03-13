@@ -7,8 +7,10 @@ import {
     YAxis,
     CartesianGrid,
     Tooltip,
+    ResponsiveContainer
   } from "recharts";
 import axios from "axios";
+import "./LineChart.scss"
 
 function LineChart({id}) {
     const [fetchData, setfetchData] = useState([]);
@@ -18,13 +20,12 @@ function LineChart({id}) {
     return `https://api.coingecko.com/api/v3/coins/${id}/market_chart?vs_currency=usd&days=${days}`;
   };
 
-  const lastUpdated = (data) =>
-    new Date(data).toLocaleString({
-      timeZone: "Asia/Bangkok",
-      day: "numeric",
-      month: "long",
-      year: "numeric",
-    });
+  function formatDate(dateString) {
+    const date = new Date(dateString);
+    const day = date.getDate().toString().padStart(2, '0');
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    return `${day}/${month}`;
+  }
 
   const fetchGraphData = async () => {
     const data = await axios.get(url());
@@ -34,13 +35,13 @@ function LineChart({id}) {
   const data = [
     fetchData.map((e) => {
       return {
-        date: lastUpdated(new Date(e[0])),
+        date:formatDate(new Date(e[0])),
         price: e[1].toFixed(2),
       };
     }),
   ];
 
-  console.log("data", id);
+  console.log("data", data);
 
   useEffect(() => {
     fetchGraphData();
@@ -50,36 +51,56 @@ function LineChart({id}) {
 
     
     return (
-        <div className="main_container">
-            <AreaChart
-                width={730}
-                height={250}
-                data={data[0]}
-                margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
-                >
-                <defs>
-                <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="5%" stopColor="#8884d8" stopOpacity={0.8} />
-                    <stop offset="95%" stopColor="#8884d8" stopOpacity={0} />
-                </linearGradient>
-                </defs>
-                <XAxis dataKey="date" />
-                <YAxis />
-                <CartesianGrid strokeDasharray="3 3" />
-                <Tooltip />
-                <Area
-                type="monotone"
-                dataKey="price"
-                stroke="#8884d8"
-                fillOpacity={1}
-                fill="url(#colorUv)"
-                />
-            </AreaChart>
+        <div className="chart_container">
+                <ResponsiveContainer width="100%" height={400}>
+    <AreaChart
+        data={data[0]}
+        margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
+    >
+        <defs>
+            <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="5%" stopColor="#c31432" stopOpacity={0.8} />
+                <stop offset="95%" stopColor="#c31432" stopOpacity={0} />
+            </linearGradient>
+        </defs>
+        <XAxis dataKey="date" stroke="#ffffff" />
+        <YAxis stroke="#ffffff" />
+        <CartesianGrid strokeDasharray="3 3" />
+        <Tooltip
+            content={({ active, payload, label }) => {
+                if (active && payload && payload.length) {
+                    return (
+                        <div
+                            style={{
+                                background: 'black',
+                                color: 'white',
+                                padding: '10px',
+                                borderRadius: '5px',
+                                border: '1px solid white',
+                            }}
+                        >
+                            <p>{`Date : ${label} Price : ${payload[0].value}`}</p>
+                        </div>
+                    );
+                }
+
+                return null;
+            }}
+        />
+        <Area
+            type="monotone"
+            dataKey="price"
+            stroke="#c31432"
+            fillOpacity={1}
+            fill="url(#colorUv)"
+        />
+    </AreaChart>
+</ResponsiveContainer>
             <div className="btn_container">
-                <button onClick={()=>setDays(1)}>1</button>
-                <button onClick={()=>setDays(30)}>30</button>
-                <button onClick={()=>setDays(90)}>90</button>
-                <button onClick={()=>setDays(365)}>365</button>
+                <button onClick={()=>setDays(7)}>7 Days</button>
+                <button onClick={()=>setDays(30)}>30 Days</button>
+                <button onClick={()=>setDays(90)}>3 Months</button>
+                <button onClick={()=>setDays(365)}>1 Year</button>
             </div>
         </div>
         
