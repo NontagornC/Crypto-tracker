@@ -1,11 +1,19 @@
+@import "./utils/mixin.scss";
+
 html {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-size: 62.5%;
+  font-size: 50%;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-family: "barcadebrawl", sans-serif;
+  @include lg {
+    font-size: 62.5% !important;
+  }
+  @include md {
+    font-size: 55% !important;
+  }
+
   &::-webkit-scrollbar {
     width: 1.5rem;
     height: 1.4rem;
@@ -23,9 +31,4 @@ html {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
-}
-
-@font-face {
-  font-family: "barcadebrawl";
-  src: url("./asset/font/BarcadeBrawl.ttf");
 }

@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
-import {Row,Col,Container,Table,Form} from 'react-bootstrap';
 import { SiBitcoincash } from "react-icons/si";
-import { BiArrowToTop,BiArrowToBottom } from "react-icons/bi";
+import React, { useEffect, useState } from 'react'
+import {Row,Col,Container,Table,Form} from 'react-bootstrap';
+import { BiArrowToTop,BiArrowToBottom,BiSortAlt2 } from "react-icons/bi";
 import fetchData from '../../utils/fetchData';
 import "./CoinDetailPage.scss"
 
@@ -11,6 +11,7 @@ const CoinDetailPage = () => {
   const [allCoinData,setAllCoinData]=useState([])
   const [searchWord,setSearchWord] = useState("")
   const navigate = useNavigate()
+  const [sortOrder,setSortOrder] = useState("asc")
   
   useEffect(()=>{
     getData()
@@ -32,6 +33,19 @@ const CoinDetailPage = () => {
     console.error(error)
   })
 
+  const handleSort = () => {
+    if (sortOrder === "asc") {
+      setAllCoinData(prevData => prevData.sort((a, b) => b.current_price - a.current_price))
+      setSortOrder("desc")
+    } else {
+      setAllCoinData(prevData => prevData.sort((a, b) => a.current_price - b.current_price))
+      setSortOrder("asc")
+    }
+  }
+
+  const formatNumber=(num)=> {
+    return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
+  }
   return (
     <div className='detail_container'>
       <Container>
@@ -43,7 +57,7 @@ const CoinDetailPage = () => {
               <Col key={result.id} onClick={()=>navigate(`/singlecoin/${result.id}`)}>
                   <Row className='img'><img src={result.image} alt={result.id} /></Row>
                   <Row className='name'>{result.name}</Row>
-                  <Row className='price'>{result.current_price.toFixed(3)}<span>&#36;</span></Row>
+                  <Row className='price'>{formatNumber(result.current_price.toFixed(2))}<span>&#36;</span></Row>
               </Col>
             )
           })}
@@ -58,7 +72,6 @@ const CoinDetailPage = () => {
               aria-label="Search" value={searchWord}
               onChange={(e)=>{
                 setSearchWord(e.target.value)
-                console.log(searchWord);
               }}
               style={{ color: "white" }}
             />
@@ -70,10 +83,10 @@ const CoinDetailPage = () => {
             <tr>
               <th className='symbol'><SiBitcoincash/></th>
               <th >Currency</th>
-              <th >Price</th>
-              <th className='high'>24 High <BiArrowToTop/></th>
-              <th className='low'>24 Low <BiArrowToBottom/></th>
-              <th >Market Cap</th>
+              <th >Price <BiSortAlt2 onClick={handleSort} style={{cursor: "pointer"}}/></th>
+              <th className='high'>24 High <BiArrowToTop onClick={handleSort} style={{cursor: "pointer"}}/></th>
+              <th className='low'>24 Low <BiArrowToBottom onClick={handleSort} style={{cursor: "pointer"}}/></th>
+              <th >Market Cap <BiSortAlt2 onClick={handleSort} style={{cursor: "pointer"}}/></th>
             </tr>
           </thead>
           <tbody>
@@ -83,12 +96,12 @@ const CoinDetailPage = () => {
                 ).map((item)=>{
               return (
                 <tr key={item.id} onClick={()=>navigate(`/singlecoin/${item.id}`)}>
-                  <td>{item.market_cap_rank}</td>
+                  <td className='rank'>{item.market_cap_rank}</td>
                   <td className='detail_box'><img src={item.image} alt={item.name} />{item.symbol.toUpperCase()} <span>{item.name}</span></td>
-                  <td>&#36; {item.current_price}</td>
+                  <td>&#36; {formatNumber(item.current_price)}</td>
                   <td className='high'>&#36; {item.high_24h}</td>
                   <td className='low'>&#36; {item.low_24h}</td>
-                  <td>&#36; {item.market_cap}</td>
+                  <td>&#36; {formatNumber(item.market_cap)}</td>
                 </tr>
               )
             })}

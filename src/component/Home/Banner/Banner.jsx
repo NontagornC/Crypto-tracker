@@ -28,6 +28,7 @@ const Banner =()=> {
                     <Button variant="secondary" onClick={()=>navigate(`/detailpage`)}>Get Started</Button>
                 </Col>
                 <Col className="right">
+                    <img src="https://static.vecteezy.com/system/resources/previews/009/394/422/original/3d-illustration-bitcoin-cryptocurrency-png.png" alt="" />
                 </Col>
             </Row>
         </div>

@@ -1,3 +1,5 @@
+@import "../../../utils/mixin.scss";
+
 .about_container {
   width: 100%;
   margin: 0;
@@ -8,6 +10,8 @@
   color: white;
   background-image: linear-gradient(
     to bottom right,
+    #410a68,
+    #3a0f58,
     #240b36,
     #250829,
     #22051e,
@@ -23,7 +27,9 @@
   );
   .big_text {
     padding: 1.5rem 2rem;
+
     .col {
+      align-items: center;
       font-size: 4rem;
       font-weight: 700;
       text-shadow: 3px 3px 3px rgba(255, 255, 255, 0.6);

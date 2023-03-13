@@ -1,11 +1,11 @@
+@import "../../../../utils/mixin.scss";
+
 .table_box {
   overflow: hidden;
   width: calc(85% - 1rem);
   border: 1px solid white;
   border-radius: 2rem;
   table {
-    padding-bottom: 3rem;
-    margin: 0;
     thead {
       tr {
         height: 5rem;
@@ -17,6 +17,10 @@
         }
         .symbol {
           width: 10rem;
+          display: none;
+          @include md {
+            display: table-cell;
+          }
           svg {
             width: 3rem;
             height: 3rem;
@@ -47,19 +51,39 @@
           z-index: 100;
         }
         td {
-          font-size: 1.4rem;
+          font-size: 0.8rem;
+          @include md {
+            font-size: 1.4rem;
+          }
         }
         .detail_box {
           text-align: start;
-          font-size: 2rem;
+          font-size: 1rem;
+          @include md {
+            font-size: 2rem;
+          }
           img {
-            width: 6rem;
-            height: 6rem;
-            padding: 1rem;
+            width: 3rem;
+            height: 3rem;
+            padding: 0.5;
+            @include md {
+              width: 6rem;
+              height: 6rem;
+              padding: 1rem;
+            }
           }
           span {
-            font-size: 1.2rem;
+            font-size: 0.6rem;
             color: rgba(255, 255, 255, 0.5);
+            @include md {
+              font-size: 1.2rem;
+            }
+          }
+        }
+        .rank {
+          display: none;
+          @include md {
+            display: table-cell;
           }
         }
         .high {

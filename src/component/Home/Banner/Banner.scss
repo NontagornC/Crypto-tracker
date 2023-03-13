@@ -1,3 +1,5 @@
+@import "../../../utils/mixin.scss";
+
 .banner_container {
   min-width: 100%;
   background-image: linear-gradient(
@@ -13,16 +15,24 @@
     #1e0315,
     #22051e,
     #250829,
-    #240b36
+    #240b36,
+    #3a0f58,
+    #410a68
   );
 }
 
 .left {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  height: 100vh;
+  display: block;
+  height: 70vh;
   width: calc(50% - 10px);
+  z-index: 10;
+  position: relative;
+  padding-top: 12rem;
+  @include md {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
   .text_running {
     display: flex;
     flex-direction: column;
@@ -33,8 +43,11 @@
       font-weight: 800;
       top: 30%;
       left: 0;
-      font-size: 5rem;
+      font-size: 3rem;
       padding: 2rem 0;
+      @include md {
+        font-size: 5rem;
+      }
     }
     .small_text {
       font-size: 2rem;
@@ -67,11 +80,24 @@
   }
 }
 .right {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  position: absolute; /* Add this */
+  bottom: 0; /* Add this */
+  right: 0; /* Add this */
+  width: 70%; /* Add this */
+  height: 70%;
+  @include md {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9;
+  }
   img {
-    height: 80%;
-    width: 80%;
+    height: 60%; /* Set the height to 100% to cover the entire width */
+    width: auto; /* Set the width to auto to maintain the aspect ratio */
+    @include md {
+      height: 80%;
+      width: 80%;
+    }
   }
 }

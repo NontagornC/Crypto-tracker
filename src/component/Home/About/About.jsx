@@ -9,7 +9,7 @@ const About =()=> {
     return (
         <div className="about_container">
             <Row className="big_text">
-                <Col>Make youe crypto transections easier</Col>
+                <Col >Make your crypto transections easier</Col>
             </Row>
             <Row className="small_text">
                 <Col>We Guarantee the security of your data transection</Col>

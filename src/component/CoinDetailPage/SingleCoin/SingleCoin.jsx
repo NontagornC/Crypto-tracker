@@ -16,6 +16,9 @@ const SingleCoin = () => {
       month: 'long',
       year: 'numeric'
     })
+    const formatNumber=(num)=> {
+      return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
+    }
 
   return (
     <div className='singlecoin_container'>
@@ -34,14 +37,14 @@ const SingleCoin = () => {
           </div>
           <div className='price_detail'>
             <span>
-              24 High : {data.market_data.high_24h.usd.toFixed(2)}
+              24 High : {formatNumber(data.market_data.high_24h.usd.toFixed(2))}
             </span>
             <div className="price_box">
-              <h1>&#36; {data.market_data.current_price.usd.toFixed(2)}</h1>
-              <span>{data.market_data.price_change_percentage_24h.toFixed(2)} &#37;</span>
+              <h1>&#36; {formatNumber(data.market_data.current_price.usd.toFixed(2))}</h1>
+              <span>{formatNumber(data.market_data.price_change_percentage_24h.toFixed(2))} &#37;</span>
             </div>
             <span>
-              24 Low : {data.market_data.low_24h.usd.toFixed(2)}
+              24 Low : {formatNumber(data.market_data.low_24h.usd.toFixed(2))}
             </span>
           </div>
 
@@ -51,29 +54,29 @@ const SingleCoin = () => {
 
         <div className='sub_detail'>
           <div className="box">
-            <div>
-              ATH <span>{lastUpdated(data.market_data.ath_date.usd)}</span>
+            <div className='atl_ath'>
+              ATH <h5>{lastUpdated(data.market_data.ath_date.usd)}</h5>
             </div>
-            <h1>&#36; {data.market_data.ath.usd}</h1>
-            <span className="ath_percent">{data.market_data.ath_change_percentage.usd} &#37;</span>
+            <h1>&#36; {formatNumber(data.market_data.ath.usd)}</h1>
+            <span className="ath_percent">{data.market_data.ath_change_percentage.usd.toFixed(3)} &#37;</span>
           </div>
           <div className="box middle_box">
-            <div>
-              ATL <span>{lastUpdated(data.market_data.atl_date.usd)}</span>
+            <div className='atl_ath'>
+              ATL <h5>{lastUpdated(data.market_data.atl_date.usd)}</h5>
             </div>
-            <h1>&#36; {data.market_data.atl.usd}</h1>
-            <span className="atl_percent">{data.market_data.atl_change_percentage.usd} &#37;</span>
+            <h1>&#36; {formatNumber(data.market_data.atl.usd)}</h1>
+            <span className="atl_percent">{formatNumber(data.market_data.atl_change_percentage.usd.toFixed(3))} &#37;</span>
           </div>
           <div className="box">
             <div className='market_detail'>
               <h1>Market Cap</h1>
               <div className='block'>
-                &#36; {data.market_data.market_cap.usd} <span>{data.market_data.market_cap_change_percentage_24h.toFixed(2)} &#37;</span>
+                &#36; {formatNumber(data.market_data.market_cap.usd)} <span>{formatNumber(data.market_data.market_cap_change_percentage_24h.toFixed(2))} &#37;</span>
               </div>
             </div>
             <div className='market_detail'>
               <h1>total volume</h1>
-              &#36; {data.market_data.total_volume.usd} 
+              &#36; {formatNumber(data.market_data.total_volume.usd)} 
             </div>
           </div>
         </div>
