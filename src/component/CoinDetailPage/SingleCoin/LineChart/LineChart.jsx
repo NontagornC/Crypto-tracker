@@ -1,75 +1,88 @@
 import React from "react";
-import { Line } from "react-chartjs-2";
-import { useState,useEffect } from "react";
+import { useState,useEffect} from "react";
+import {
+    Area,
+    AreaChart,
+    XAxis,
+    YAxis,
+    CartesianGrid,
+    Tooltip,
+  } from "recharts";
 import axios from "axios";
 
 function LineChart({id}) {
-    const [days,setDays]=useState(1)
-    const [graphData,setGraphData]=useState()
+    const [fetchData, setfetchData] = useState([]);
+    const [days,setDays]=useState(365)
 
+  const url = () => {
+    return `https://api.coingecko.com/api/v3/coins/${id}/market_chart?vs_currency=usd&days=${days}`;
+  };
 
-    const url =( id , days) =>{
-        return `https://api.coingecko.com/api/v3/coins/${id}/market_chart?vs_currency=usd&days=${days}`;
-    }
+  const lastUpdated = (data) =>
+    new Date(data).toLocaleString({
+      timeZone: "Asia/Bangkok",
+      day: "numeric",
+      month: "long",
+      year: "numeric",
+    });
 
-    const fetchGraphData = async ()=>{
-        const data = await axios.get(url(id,days))
+  const fetchGraphData = async () => {
+    const data = await axios.get(url());
+    setfetchData(data.data.prices);
+  };
 
-        console.log("test1",data.data.prices);
-        setGraphData(data.data.prices)
-    }
-    console.log("test2",graphData);
+  const data = [
+    fetchData.map((e) => {
+      return {
+        date: lastUpdated(new Date(e[0])),
+        price: e[1].toFixed(2),
+      };
+    }),
+  ];
 
-    useEffect(() => {
-        fetchGraphData();
-         // eslint-disable-next-line
-      }, [days]);
+  console.log("data", id);
+
+  useEffect(() => {
+    fetchGraphData();
+    // eslint-disable-next-line
+  }, [days]);
     
-      useEffect(() => {
-        fetchGraphData();
-         // eslint-disable-next-line
-      }, []);
 
-
-
-    // const [userData, setUserData] = useState({
-    //     labels: [2016, 2017, 2018, 2019, 2020],
-    //     datasets: [
-    //       {
-    //         label: "Users Gained",
-    //         data: [80000, 45688, 78888, 90000, 4300],
-    //         backgroundColor: [
-    //           "rgba(75,192,192,1)",
-    //           "#ecf0f1",
-    //           "#50AF95",
-    //           "#f3ba2f",
-    //           "#2a71d0",
-    //         ],
-    //         borderColor: "black",
-    //         borderWidth: 2,
-    //       },
-    //     ],
-    //   });
+    
     return (
-        <div>
-             <Line data={{
-                labels: graphData?.map((e)=>{
-                    let date = new Date(e[0]);
-                    let time =
-                    date.getHours() > 12
-                      ? `${date.getHours() - 12}:${date.getMinutes()} PM`
-                      : `${date.getHours()}:${date.getMinutes()} AM`;
-                    return days === 1 ? time : date.toLocaleDateString();
-                }),
-                datasets: [{ 
-                    data: graphData?.map((e)=>{
-                        return (e[1])
-                    })
-                }]
-             }}
-             />
+        <div className="main_container">
+            <AreaChart
+                width={730}
+                height={250}
+                data={data[0]}
+                margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
+                >
+                <defs>
+                <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="5%" stopColor="#8884d8" stopOpacity={0.8} />
+                    <stop offset="95%" stopColor="#8884d8" stopOpacity={0} />
+                </linearGradient>
+                </defs>
+                <XAxis dataKey="date" />
+                <YAxis />
+                <CartesianGrid strokeDasharray="3 3" />
+                <Tooltip />
+                <Area
+                type="monotone"
+                dataKey="price"
+                stroke="#8884d8"
+                fillOpacity={1}
+                fill="url(#colorUv)"
+                />
+            </AreaChart>
+            <div className="btn_container">
+                <button onClick={()=>setDays(1)}>1</button>
+                <button onClick={()=>setDays(30)}>30</button>
+                <button onClick={()=>setDays(90)}>90</button>
+                <button onClick={()=>setDays(365)}>365</button>
+            </div>
         </div>
+        
     );
-  }
-  
-  export default LineChart;
+    }
+    export default LineChart;
