@@ -15,6 +15,7 @@ import "./LineChart.scss"
 function LineChart({id}) {
     const [fetchData, setfetchData] = useState([]);
     const [days,setDays]=useState(90)
+    const heightTest = 500
 
   const url = () => {
     return `https://api.coingecko.com/api/v3/coins/${id}/market_chart?vs_currency=usd&days=${days}`;
@@ -48,11 +49,10 @@ function LineChart({id}) {
     // eslint-disable-next-line
   }, [days]);
     
-
     
     return (
         <div className="chart_container">
-            <ResponsiveContainer width="100%" height={300}>
+            <ResponsiveContainer width="100%" height={heightTest}>
                     <AreaChart
                         data={data[0]}
                         margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
